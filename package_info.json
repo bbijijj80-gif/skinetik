@@ -1,0 +1,29 @@
+{
+  "name": "C. elegans Brain Simulator",
+  "version": "1.0.0",
+  "description": "Enhanced C. elegans neural network simulation with +10 neurons and +20 connections",
+  "platforms": [
+    "Windows",
+    "Linux",
+    "macOS"
+  ],
+  "requirements": [
+    "Python 3.7+",
+    "numpy"
+  ],
+  "features": [
+    "312 neurons (original 302 + 10 enhanced)",
+    "~7020 synaptic connections (original + 20 enhanced)",
+    "Leaky integrate-and-fire neuron model",
+    "Chemical and electrical synapses",
+    "Short-term synaptic plasticity",
+    "Neuromodulation support",
+    "Multiple stimulus patterns",
+    "Cross-platform compatibility"
+  ],
+  "installation": {
+    "windows": "python setup.py install",
+    "linux": "python3 setup.py install",
+    "macos": "python3 setup.py install && create_pkg.sh"
+  }
+}
