@@ -1,151 +1,136 @@
-# C. elegans Brain Simulator
+# C. elegans Brain Simulation - Interactive
 
-Enhanced neural network simulation based on the OpenWorm Analysis Toolbox project.
+🧠 **Enhanced C. elegans neural network simulation with interactive robot control**
 
 ## Features
 
-- **312 neurons** (original 302 + 10 enhanced neurons)
-- **Enhanced synaptic connectivity** (+20 additional connections)
-- **Neuromodulation support** - adjust network excitability
-- **Cross-platform compatibility** - Windows, Linux, macOS
-- **Leaky integrate-and-fire neuron model**
-- **Chemical and electrical synapses**
-- **Short-term synaptic plasticity**
+- ✅ **+10 Neurons**: 312 total neurons (original 302 + 10 enhanced)
+- ✅ **+20+ Neural Connections**: Enhanced synaptic connectivity
+- ✅ **Interactive Control**: Control the worm like a robot using keyboard/mouse
+- ✅ **Object Manipulation**: Create walls, food, materials; pick up and carry objects
+- ✅ **Real-time Brain Monitoring**: Watch neural activity as it happens
+- ✅ **Signal Visualization**: Brighter red dots = stronger neural signals between neurons
+- ✅ **Cross-Platform**: Works on Windows, Linux, and macOS
+- ✅ **Error Resilient**: No crashes on errors - gracefully handles exceptions
 
 ## Installation
 
-### Windows
+### Requirements
+- Python 3.7+
+- numpy
+- pygame (for interactive mode)
 
+### Install Dependencies
 ```bash
-# Install Python 3.7+ from python.org if not already installed
-pip install numpy
-python setup.py install
-# Or run directly
-python c_elegans_brain_sim.py
-```
-
-### Linux
-
-```bash
-# Install dependencies
-sudo apt-get install python3 python3-pip python3-numpy  # Debian/Ubuntu
-# or
-sudo yum install python3 python3-pip python3-numpy      # RHEL/CentOS
-
-# Install the simulator
-pip3 install numpy
-python3 setup.py install
-# Or run directly
-python3 c_elegans_brain_sim.py
-```
-
-### macOS
-
-#### Option 1: Direct Installation
-```bash
-# Install dependencies (requires Homebrew)
-brew install python3
-pip3 install numpy
-
-# Run directly
-python3 c_elegans_brain_sim.py
-```
-
-#### Option 2: PKG Installer
-```bash
-# Create the .pkg installer
-chmod +x create_pkg.sh
-./create_pkg.sh
-
-# This creates C_Elegans_Brain_Simulator.pkg
-# Double-click to install, or use:
-sudo installer -pkg C_Elegans_Brain_Simulator.pkg -target /
+pip install numpy pygame
 ```
 
 ## Usage
 
-### Basic Simulation
-
+### Run Interactive Simulation
 ```bash
+python3 c_elegans_brain_sim.py
+```
+
+### Controls
+
+| Key/Action | Function |
+|------------|----------|
+| **Arrow Keys** | Move worm manually |
+| **Space** | Pause/Resume simulation |
+| **1** | Select Wall object |
+| **2** | Select Food object |
+| **3** | Select Material object |
+| **4** | Select Obstacle object |
+| **Left Click** | Place object / Pick up object |
+| **Right Click** | Remove object |
+| **H** | Toggle help panel |
+| **R** | Reset simulation |
+| **Escape** | Quit |
+
+## How It Works
+
+### Brain Model
+- **312 Neurons**: Sensory, Interneurons, Motor, and Modulatory neurons
+- **Leaky Integrate-and-Fire Model**: Biologically realistic neuron dynamics
+- **Chemical & Electrical Synapses**: Two types of neural connections
+- **Short-term Plasticity**: Synapses strengthen/weaken with activity
+
+### Interactive Features
+1. **Sensory Input**: Worm detects food, walls, and carried objects
+2. **Brain Processing**: Neural network processes sensory inputs
+3. **Motor Output**: Brain activity controls worm movement
+4. **Object Interaction**: Build environments and watch how the worm reacts
+
+### Visualization Panel
+The right panel shows:
+- **Network Statistics**: Total neurons, synapses, timestep
+- **Active Neurons**: Top 10 most active neurons with activation bars
+- **Active Synapses**: Signal propagation between neurons
+  - 🔴 **Bright red dot** = Strong signal
+  - 🟤 **Dark red dot** = Weak signal
+  - Dot size also indicates signal strength
+
+## Cross-Platform Installation
+
+### Windows
+```cmd
+pip install numpy pygame
 python c_elegans_brain_sim.py
 ```
 
-### Programmatic Usage
-
-```python
-from c_elegans_brain_sim import CElegansBrain
-
-# Create brain with default modulation
-brain = CElegansBrain(modulation_level=1.0)
-
-# Apply neuromodulation (0.5 = less excitable, 2.0 = more excitable)
-brain.apply_modulation(1.5)
-
-# Run simulation
-results = brain.run_simulation(steps=1000, stimulus_pattern='random')
-
-# Get statistics
-stats = brain.get_network_statistics()
-print(f"Total neurons: {stats['total_neurons']}")
-print(f"Total synapses: {stats['total_synapses']}")
-
-# Save network configuration
-brain.save_to_file('network_config.json')
+### Linux
+```bash
+pip3 install numpy pygame
+python3 c_elegans_brain_sim.py
 ```
+
+### macOS
+```bash
+pip3 install numpy pygame
+python3 c_elegans_brain_sim.py
+```
+
+#### Create macOS .pkg Installer
+```bash
+chmod +x create_pkg.sh
+./create_pkg.sh
+```
+This creates `CElegansBrainSimulator.pkg` for easy installation.
 
 ## Network Statistics
 
-The enhanced network includes:
+- **Total Neurons**: 312
+  - Sensory: ~95
+  - Interneurons: ~70
+  - Motor: ~137
+  - Enhanced: 10 (EN1-EN10)
+  
+- **Total Synapses**: ~7000+
+  - Chemical synapses
+  - Electrical synapses (gap junctions)
 
-| Component | Count | Description |
-|-----------|-------|-------------|
-| Sensory Neurons | 99 | Input processing |
-| Interneurons | 132 | Signal integration |
-| Motor Neurons | 80 | Output control |
-| Modulatory Neurons | 1 | Global modulation |
-| **Total Neurons** | **312** | **+10 from original** |
-| Chemical Synapses | ~1100 | Neurotransmitter-based |
-| Electrical Synapses | ~330 | Gap junctions |
-| **Total Synapses** | **~1450** | **+20+ from base** |
+- **Enhanced Neurons** (EN1-EN10):
+  - EN1, EN2: Additional sensory neurons
+  - EN3-EN6: Additional interneurons
+  - EN7-EN9: Additional motor neurons
+  - EN10: Novel modulatory neuron
 
-## Modulation Effects
+## Project Structure
 
-The simulation demonstrates how neuromodulation affects network activity:
+```
+/workspace/
+├── c_elegans_brain_sim.py    # Main simulation script
+├── setup.py                   # Python package installer
+├── create_pkg.sh             # macOS .pkg creator
+├── README.md                 # This file
+└── ИНСТРУКЦИЯ.md            # Russian instructions
+```
 
-| Modulation Level | Spike Rate | Effect |
-|-----------------|------------|--------|
-| 0.5x | Low | Reduced excitability |
-| 1.0x | Normal | Baseline activity |
-| 1.5x | Elevated | Increased responsiveness |
-| 2.0x | High | Hyperexcitable state |
+## Based On
 
-## Files
-
-- `c_elegans_brain_sim.py` - Main simulation script
-- `setup.py` - Python package installation
-- `create_pkg.sh` - macOS PKG creator
-- `package_info.json` - Package metadata
-- `c_elegans_brain_network.json` - Saved network configuration (generated)
-
-## Requirements
-
-- Python 3.7 or higher
-- NumPy
-
-Optional:
-- Matplotlib (for advanced visualization)
-- SciPy (for additional analysis)
+This project extends concepts from [OpenWorm Analysis Toolbox](https://github.com/openworm/open-worm-analysis-toolbox) with additional features for interactive control and visualization.
 
 ## License
 
-MIT License - See LICENSE file in the OpenWorm Analysis Toolbox repository.
-
-## Credits
-
-Based on the [OpenWorm Analysis Toolbox](https://github.com/openworm/open-worm-analysis-toolbox) project.
-
-This enhanced version adds:
-- 10 new neurons (EN1-EN10)
-- 20+ additional synaptic connections
-- Neuromodulation capabilities
-- Cross-platform installation support
+MIT License
